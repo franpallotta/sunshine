@@ -16,6 +16,16 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.util.Log;
+
+import 	java.net.HttpURLConnection;
+import java.io.BufferedReader;
+import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -25,7 +35,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new ForecastFragment())
                     .commit();
         }
     }
@@ -53,42 +63,5 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
 
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            String [] forecast_Array = {
-                    "Today - Sunny - 88/63",
-                    "Tomorrow - Sunny - 88/63",
-                    "Weds - Sunny - 88/63",
-                    "Thurs - Sunny - 88/63",
-                    "Fri - Sunny - 88/63",
-                    "Sat - Sunny - 88/63",
-                    "Sun - Sunny - 88/63"
-            };
-
-            ArrayList<String> weekForecast = new ArrayList<String>(Arrays.asList(forecast_Array));
-
-            ArrayAdapter mForecastAdapter =
-                    new ArrayAdapter<String>(
-                            getActivity(),
-                            R.layout.list_item_forecast,
-                            R.id.list_item_forecast_textview,
-                            weekForecast
-                    );
-
-            ListView myListView = (ListView) rootView.findViewById(R.id.listview_forecast);
-            myListView.setAdapter(mForecastAdapter);
-
-            return rootView;
-        }
-    }
 }
